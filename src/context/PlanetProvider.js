@@ -6,6 +6,7 @@ import Api from '../services/Api';
 function PlanetProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [keysResult, setKeysResult] = useState([]);
+  const [inputNamePlanet, setInputNamePlanet] = useState('');
 
   async function getPlanets() {
     const planetss = await Api();
@@ -20,6 +21,8 @@ function PlanetProvider({ children }) {
     getPlanets,
     planets,
     keysResult,
+    inputNamePlanet,
+    setInputNamePlanet,
   };
 
   return (

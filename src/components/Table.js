@@ -1,13 +1,25 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
 function Table() {
-  const { getPlanets, planets, keysResult } = useContext(PlanetContext);
+  const { getPlanets, planets, keysResult, inputNamePlanet } = useContext(PlanetContext);
+  const [filterPlanets, setFilterPlanets] = useState([]);
 
   useEffect(() => {
     getPlanets();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (filterPlanets.length === 0) {
+      setFilterPlanets(planets);
+    }
+  }, [filterPlanets.length, planets]);
+
+  useEffect(() => {
+    const filterByName = planets.filter(({ name }) => name.includes(inputNamePlanet));
+    setFilterPlanets(filterByName);
+  }, [inputNamePlanet, planets]);
 
   return (
     <table>
@@ -21,7 +33,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        { planets.map((pla, id) => (
+        { filterPlanets.map((pla, id) => (
           <tr key={ id }>
             {
               keysResult.map((ke, idd) => {
