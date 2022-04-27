@@ -2,13 +2,57 @@ import React, { useContext, useEffect, useState } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
 function Table() {
-  const { getPlanets, planets, keysResult, inputNamePlanet } = useContext(PlanetContext);
+  const {
+    getPlanets,
+    planets,
+    keysResult,
+    inputNamePlanet,
+    allFilters } = useContext(PlanetContext);
   const [filterPlanets, setFilterPlanets] = useState([]);
 
   useEffect(() => {
     getPlanets();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (allFilters.length === 0) {
+      return setFilterPlanets(planets);
+    }
+    allFilters.forEach((ele, ind) => {
+      console.log(ind);
+      // if (ind >= 1) {
+      //   console.log('aaaa');
+      //   switch (ele.comparison) {
+      //   case 'maior que':
+      //     setFilterPlanets(filterPlanets
+      //       .filter((el) => Number(el[ele.column]) > Number(ele.value)));
+      //     break;
+      //   case 'menor que':
+      //     setFilterPlanets(filterPlanets
+      //       .filter((el) => Number(el[ele.column]) < Number(ele.value)));
+      //     break;
+      //   default:
+      //     setFilterPlanets(filterPlanets
+      //       .filter((el) => Number(el[ele.column]) === Number(ele.value)));
+      //   }
+      // }
+      switch (ele.comparison) {
+      case 'maior que':
+        setFilterPlanets(filterPlanets
+          .filter((el) => Number(el[ele.column]) > Number(ele.value)));
+        break;
+      case 'menor que':
+        setFilterPlanets(filterPlanets
+          .filter((el) => Number(el[ele.column]) < Number(ele.value)));
+        break;
+      default:
+        setFilterPlanets(filterPlanets
+          .filter((el) => Number(el[ele.column]) === Number(ele.value)));
+      }
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allFilters, planets]);
 
   useEffect(() => {
     if (filterPlanets.length === 0) {

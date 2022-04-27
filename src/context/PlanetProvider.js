@@ -7,6 +7,11 @@ function PlanetProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [keysResult, setKeysResult] = useState([]);
   const [inputNamePlanet, setInputNamePlanet] = useState('');
+  const [allFilters, setAllFilters] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState({
+    column: 'population',
+    comparison: 'maior que',
+    value: 0 });
 
   async function getPlanets() {
     const planetss = await Api();
@@ -23,6 +28,10 @@ function PlanetProvider({ children }) {
     keysResult,
     inputNamePlanet,
     setInputNamePlanet,
+    selectedFilters,
+    setSelectedFilters,
+    allFilters,
+    setAllFilters,
   };
 
   return (
