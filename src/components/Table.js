@@ -19,24 +19,7 @@ function Table() {
     if (allFilters.length === 0) {
       return setFilterPlanets(planets);
     }
-    allFilters.forEach((ele, ind) => {
-      console.log(ind);
-      // if (ind >= 1) {
-      //   console.log('aaaa');
-      //   switch (ele.comparison) {
-      //   case 'maior que':
-      //     setFilterPlanets(filterPlanets
-      //       .filter((el) => Number(el[ele.column]) > Number(ele.value)));
-      //     break;
-      //   case 'menor que':
-      //     setFilterPlanets(filterPlanets
-      //       .filter((el) => Number(el[ele.column]) < Number(ele.value)));
-      //     break;
-      //   default:
-      //     setFilterPlanets(filterPlanets
-      //       .filter((el) => Number(el[ele.column]) === Number(ele.value)));
-      //   }
-      // }
+    allFilters.forEach((ele) => {
       switch (ele.comparison) {
       case 'maior que':
         setFilterPlanets(filterPlanets

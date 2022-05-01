@@ -10,6 +10,9 @@ function Header() {
     selectedFilters,
     setSelectedFilters } = useContext(PlanetContext);
 
+  const clearOptions = (opcao) => !allFilters
+    .find((filtro) => opcao === filtro.column);
+
   return (
     <header>
       <h1>STAR WARS</h1>
@@ -29,6 +32,7 @@ function Header() {
         data-testid="column-filter"
       >
         { ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']
+          .filter(clearOptions)
           .map((elemen, id) => (
             <option key={ id } value={ elemen }>{ elemen }</option>
           )) }
